@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swiggy_clone/Screens/Home.dart';
 
 class AddLocation extends StatefulWidget {
   const AddLocation({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class _AddLocationState extends State<AddLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.white,
         toolbarHeight: 150,
@@ -25,13 +27,19 @@ class _AddLocationState extends State<AddLocation> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_back_rounded)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.arrow_back_rounded)),
                     Row(
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Colors.deepOrange,
-                          size: 30,
+                        GestureDetector(
+                          onTap: () => print('Tapped location icon'),
+                          child: Icon(
+                            Icons.location_on,
+                            color: Colors.deepOrange,
+                            size: 30,
+                          ),
                         ),
                         Text(
                           'Kashish Park',

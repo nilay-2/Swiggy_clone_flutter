@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swiggy_clone/Screens/AddLocation.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -91,7 +92,11 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w900, fontSize: 20),
                               ),
                               TextButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (
+                                          context) => const AddLocation()));
+                                },
                                 icon: Icon(
                                   Icons.keyboard_arrow_down_outlined,
                                   color: Colors.grey[800],
@@ -384,7 +389,7 @@ class _HomeState extends State<Home> {
                                 onPressed: () {},
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('EXPLORE FOOD',
                                         style: TextStyle(
@@ -399,10 +404,10 @@ class _HomeState extends State<Home> {
                                 ),
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(18.0),
+                                            BorderRadius.circular(18.0),
                                             side: BorderSide(
                                               color: Color.fromRGBO(
                                                   233, 233, 248, 1.0),
@@ -458,9 +463,9 @@ class _HomeState extends State<Home> {
                             Text(
                               'Swiggy clone - crafted with ♥',
                               style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
+                                  color: Colors.black54,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500
                               ),
                             )
                           ],
