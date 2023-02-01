@@ -17,8 +17,8 @@ class _HotelListState extends State<HotelList> {
       elevation: 0,
       child: Row(
         children: [
-          Padding(padding: EdgeInsets.all(10),
-          child: Text('${hotel['name']}', style: TextStyle(
+          Padding(padding: const EdgeInsets.all(10),
+          child: Text('${hotel['name']}', style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold
           ),),
