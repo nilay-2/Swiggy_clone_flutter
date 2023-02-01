@@ -38,24 +38,22 @@ class _HotelListState extends State<HotelList> {
         child: Column(
           children: [
             Container(
-                height: 500,
-                width: 500,
                 child: StreamBuilder(
                   stream: ref.onValue,
                   builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                     if (!snapshot.hasData) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 80,
-                            child: CircularProgressIndicator(
-                              color: Colors.deepOrange,
-                              strokeWidth: 8,
-                            ),
-                          )
-                        ],
+                      return Container(
+                        width: double.infinity,
+                        height: 500,
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          child: const CircularProgressIndicator(
+                            color: Colors.deepOrange,
+                            strokeWidth: 8,
+                          ),
+                        ),
                       );
                     } else {
                       List<dynamic> list =
@@ -63,6 +61,8 @@ class _HotelListState extends State<HotelList> {
                       list = list.where((element) => element != null).toList();
                       print(list);
                       return ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: snapshot.data!.snapshot.children.length,
                         itemBuilder: (context, index) {
                           return HotelCardTemplate(list[index]);
