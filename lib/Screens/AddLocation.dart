@@ -28,7 +28,11 @@ class _AddLocationState extends State<AddLocation> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const Home()));
                         },
                         icon: Icon(Icons.arrow_back_rounded)),
                     Row(

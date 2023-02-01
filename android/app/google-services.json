@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "559154661309",
+    "project_id": "swiggy-clone-flutter",
+    "storage_bucket": "swiggy-clone-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559154661309:android:bd347952a20616826974d4",
+        "android_client_info": {
+          "package_name": "com.example.swiggy_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559154661309-ei6kfj2kedesk2bso0f6ip05eaian71v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSFYF2HRakgLFdr6EflsRHg4c5OuHJujs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559154661309-ei6kfj2kedesk2bso0f6ip05eaian71v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

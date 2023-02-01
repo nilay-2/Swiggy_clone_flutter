@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swiggy_clone/Screens/AddLocation.dart';
-
+import 'package:swiggy_clone/Screens/Hotel_list.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -93,9 +93,11 @@ class _HomeState extends State<Home> {
                               ),
                               TextButton.icon(
                                 onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (
-                                          context) => const AddLocation()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AddLocation()));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_arrow_down_outlined,
@@ -173,13 +175,22 @@ class _HomeState extends State<Home> {
                     children: [
                       Column(
                         children: [
-                          ClipRRect(
-                            child: Image.asset(
-                              'assets/images/food.PNG',
-                              height: 85,
-                              width: 100,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HotelList()));
+                            },
+                            child: ClipRRect(
+                              child: Image.asset(
+                                'assets/images/food.PNG',
+                                height: 85,
+                                width: 100,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            borderRadius: BorderRadius.circular(20),
                           ),
                           SizedBox(
                             height: 5,
@@ -389,7 +400,7 @@ class _HomeState extends State<Home> {
                                 onPressed: () {},
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('EXPLORE FOOD',
                                         style: TextStyle(
@@ -404,10 +415,10 @@ class _HomeState extends State<Home> {
                                 ),
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
+                                            RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(18.0),
+                                                BorderRadius.circular(18.0),
                                             side: BorderSide(
                                               color: Color.fromRGBO(
                                                   233, 233, 248, 1.0),
@@ -465,8 +476,7 @@ class _HomeState extends State<Home> {
                               style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 20,
-                                  fontWeight: FontWeight.w500
-                              ),
+                                  fontWeight: FontWeight.w500),
                             )
                           ],
                         ),
