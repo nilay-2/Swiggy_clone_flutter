@@ -18,12 +18,153 @@ class _HotelListState extends State<HotelList> {
     return Card(
       elevation: 0,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Stack(
+            children: [
+              Container(
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  foregroundDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black,
+                        Colors.transparent,
+                        Colors.transparent,
+                        Colors.black
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0, 0.2, 0.7, 1],
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      '${hotel['coverImage']}',
+                      width: 150,
+                      height: 150,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 10,
+                top: 105,
+                child: Column(
+                  children: [
+                    const Text('50%  OFF',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        Text("UPTO",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold)),
+                        Icon(
+                          Icons.currency_rupee,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Text("100",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
           Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              '${hotel['name']}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${hotel['name']}',
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.stars_rounded,
+                      color: Colors.green[700],
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '${hotel['rating']}  (${hotel['ratingCount']}) - ${hotel['deliveryTime']} mins',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 19),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  '${hotel['description']}',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[700]),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  '${hotel['address']} - ${hotel['distance']} km',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[700]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 1,
+                        width: 210,
+                        decoration: BoxDecoration(
+                            border:
+                                Border(bottom: BorderSide(color: Colors.grey))),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.delivery_dining,
+                            size: 28,
+                            color: Colors.grey[600],
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text('Free Delivery', style: TextStyle(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16
+                          ),)
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           )
         ],
@@ -189,42 +330,61 @@ class _HotelListState extends State<HotelList> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-                child: StreamBuilder(
-              stream: ref.onValue,
-              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                if (!snapshot.hasData) {
-                  return Container(
-                    width: double.infinity,
-                    height: 500,
-                    alignment: Alignment.center,
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      child: const CircularProgressIndicator(
-                        color: Colors.deepOrange,
-                        strokeWidth: 8,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Top rated near you',
+                style: TextStyle(
+                  color: Colors.grey[800],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                  child: StreamBuilder(
+                stream: ref.onValue,
+                builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                      width: double.infinity,
+                      height: 500,
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        child: const CircularProgressIndicator(
+                          color: Colors.deepOrange,
+                          strokeWidth: 8,
+                        ),
                       ),
-                    ),
-                  );
-                } else {
-                  List<dynamic> list = snapshot.data!.snapshot.value as dynamic;
-                  list = list.where((element) => element != null).toList();
-                  print(list);
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data!.snapshot.children.length,
-                    itemBuilder: (context, index) {
-                      return HotelCardTemplate(list[index]);
-                    },
-                  );
-                }
-              },
-            ))
-          ],
+                    );
+                  } else {
+                    List<dynamic> list =
+                        snapshot.data!.snapshot.value as dynamic;
+                    list = list.where((element) => element != null).toList();
+                    // print(list);
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.snapshot.children.length,
+                      itemBuilder: (context, index) {
+                        return HotelCardTemplate(list[index]);
+                      },
+                    );
+                  }
+                },
+              ))
+            ],
+          ),
         ),
       ),
     );
