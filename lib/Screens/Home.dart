@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swiggy_clone/Screens/AddLocation.dart';
 import 'package:swiggy_clone/Screens/Hotel_list.dart';
+import 'package:swiggy_clone/Screens/Hotel_list.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -31,10 +32,19 @@ class _HomeState extends State<Home> {
             label: 'Swiggy',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/food-hot.png',
-              height: 40,
-              width: 40,
+            icon: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                        const HotelList()));
+              },
+              child: Image.asset(
+                'assets/icons/food-hot.png',
+                height: 40,
+                width: 40,
+              ),
             ),
             label: 'Food',
           ),
