@@ -13,7 +13,52 @@ class HotelList extends StatefulWidget {
 
 class _HotelListState extends State<HotelList> {
   final ref = FirebaseDatabase.instance.ref('Restaurants');
-
+  List<Map<String,dynamic>> hoteList = [
+    {
+      "address": "Thane West",
+      // "coverImage": "https://firebasestorage.googleapis.com/v0/b/swiggy-clone-flutter.appspot.com/o/1.jpeg?alt=media&token=971278fd-9963-4e90-a681-a2f9dfe9f270",
+      "coverImage": "1.jpeg",
+      "deliveryTime": 26,
+      "description": "Seafood, Indian, Maharashtra",
+      "distance": 19,
+      "id": 1,
+      "name": "Mi Hi koli",
+      "rating": 4.2,
+      "ratingCount": "100+"
+    },
+    {
+      "address": "Thane West",
+      // "coverImage": "https://firebasestorage.googleapis.com/v0/b/swiggy-clone-flutter.appspot.com/o/2.jpeg?alt=media&token=77cf233e-6cb6-4036-adda-72bdce78c005",
+      "coverImage": "2.jpeg",
+      "deliveryTime": 28,
+      "description": "Chinese, Fast Food",
+      "distance": 30,
+      "name": "Silly Chilly",
+      "rating": 3.9,
+      "ratingCount": "1k+"
+    },
+    {
+      "address": "Mulund",
+      // "coverImage": "https://firebasestorage.googleapis.com/v0/b/swiggy-clone-flutter.appspot.com/o/3.jpeg?alt=media&token=533612a7-6df6-4cca-a14b-725d4e7cc42d",
+      "coverImage": "3.jpeg",
+      "deliveryTime": 38,
+      "description": "Burgers, Biryani",
+      "distance": 1.6,
+      "name": "KFC",
+      "rating": 3.9,
+      "ratingCount": "100+"
+    },
+    {
+      "address": "Thane",
+      // "coverImage": "https://firebasestorage.googleapis.com/v0/b/swiggy-clone-flutter.appspot.com/o/4.jpeg?alt=media&token=d6d4cde4-248e-4323-bc41-f79b630e1be1",
+      "coverImage": "4.jpeg",
+      "deliveryTime": "40",
+      "description": "Chinese, Sushi, Asian",
+      "name": "Fat Monk Chinese",
+      "rating": 4.2,
+      "ratingCount": "100+"
+    }
+  ];
   Widget HotelCardTemplate(hotel) {
     return Card(
       elevation: 0,
@@ -42,6 +87,11 @@ class _HotelListState extends State<HotelList> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
+                    // child: Image.asset(
+                    //   'assets/images/${hotel['coverImage']}',
+                    //   width: 150,
+                    //   height: 150,
+                    // ),
                     child: Image.network(
                       '${hotel['coverImage']}',
                       width: 150,
@@ -354,6 +404,8 @@ class _HotelListState extends State<HotelList> {
                 stream: ref.onValue,
                 builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                   if (!snapshot.hasData) {
+                    // print(snapshot);
+                    // return Text('Loading ....', style: TextStyle(fontSize: 18),);
                     return Container(
                       width: double.infinity,
                       height: 500,
@@ -374,15 +426,26 @@ class _HotelListState extends State<HotelList> {
                     // print(list);
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.snapshot.children.length,
+                      // itemCount: hoteList.length,
                       itemBuilder: (context, index) {
                         return HotelCardTemplate(list[index]);
                       },
                     );
                   }
                 },
-              ))
+              )
+                // child: ListView.builder(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: hoteList.length,
+                //   itemBuilder: (context, index) {
+                //     return HotelCardTemplate(hoteList[index]);
+                //   },
+                // ),
+              )
+              // https://firebasestorage.googleapis.com/v0/b/swiggy-clone-flutter.appspot.com/o/1.jpeg?alt=media&token=971278fd-9963-4e90-a681-a2f9dfe9f270
             ],
           ),
         ),
